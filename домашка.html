@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CALCULATOR</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+function transfer(a) 
+{
+    this.a=a;
+    var arab;
+    var rim='';
+    this.toArab=function() 
+    {
+        var letters = this.a;
+        arab=0;
+        for (var i=0; i<letters.length;i++)
+        {
+
+            switch(letters[i])
+            {
+                case "X":{ 
+                    if(letters[i+1]=="L")
+                        {arab=arab+40; i=i+1; break; };
+
+                    if(letters[i+1]=="C")
+                        {arab=arab+90; i=i+1; break;};
+
+                    if(letters[i+1]!= "L" && letters[i+1] != "C")
+                        {arab=arab+10;};
+                    };
+                break;
+                case "I": { 
+                    if(letters[i+1]=="X")
+                        {arab=arab+9; i=i+1; break; };
+
+
+                    if(letters[i+1]=="V")
+                        {arab=arab+4; i=i+1; break;};
+
+                    if(letters[i+1] != "X" && letters[i+1] != "V") {arab=arab+1;};
+                    };
+                break;
+
+                case "V": {arab=arab+5;} 
+                break;
+
+                case "L":{arab=arab+50; break;} 
+                break;
+
+                case "C":{ 
+                    if(letters[i+1]=="M")
+                        {arab=arab+900; i=i+1; break;};
+
+                    if(letters[i+1]=="D")
+                        {arab=arab+400; i=i+1; break;};
+
+                    if(letters[i+1] != "M" && letters[i+1] != "D")
+                        {arab=arab+100;}
+
+                    }
+                break;
+
+                case "D" : {arab=arab+500;} 
+                break;
+
+                case "M": {arab=arab+1000;} 
+                break;
+            }
+        }
+
+        return arab;
+}
+this.toRim=function(){ 
+    var b = parseInt(this.a);
+    var c = b 
+        if(c>=1000){
+        while(b>=1000){
+            b=b-1000;
+            c=b;
+            rim=rim+'M';
+        }
+        b=c;
+        }
+
+        if(c>=900 && c<1000){
+            c=c-900;
+            rim=rim+'CM'
+            b=c;
+        }
+        if(c<500 && c>=400){
+            c=c-400;
+            rim=rim+'CD';
+            b=c;
+        }
+        if(c>=500 && c<900){
+            c=c-500;
+            b=c;
+            rim=rim+'D';
+        }
+        if(c>=100 && c<400){
+            while(b>=100){
+                b=b-100;
+                c=c-100;
+                rim=rim+'C';
+            }
+            b=c;
+        }
+        if(c>=50 && c<90){
+            rim=rim+'L';
+            c=c-50;
+            b=c;
+            while(b>=10){
+                b=b-10;
+                c=c-10;
+                rim=rim+'X';
+            }
+            b=c;
+        }
+        if(c>=40 && c<50){
+            rim=rim+'XL';
+            c=c-40;
+            b=c;
+        }
+        if (c<40 && c>=10){
+            b=c;
+            while(b>=10){
+                b=b-10;
+                rim=rim+'X';
+                c=c-10;
+            }
+            b=c;
+        }
+        if(c==9){
+            c=c-9;
+            rim=rim+'IX';
+        }
+        if(c>=5 && c<9){
+            rim=rim+'V';
+            c=c-5;
+            b=c;
+            while(b>0){
+                b=b-1;
+                c=c-1;
+                rim=rim+'I';
+            }
+
+        }
+        b=c;
+        if(c==4){
+            rim=rim+'IV'
+            c=c-4;
+        }
+        if(c>0 && c<4){
+            b=c;
+            while(b>0){
+                b=b-1;
+                c=c-1;
+                rim=rim+'I'
+            }
+        }
+        alert(rim);
+    }
+}
+
+
+var d = new transfer(prompt("NEED THE FIRST NUMBER:"));
+var e = new transfer(prompt("NEED THE SECOND NUMBER:"));
+var c=d.toArab();
+var d=e.toArab();
+var g=prompt("CHOOSE THE SIGN: + - * / ");
+
+switch(g){ 
+case '+': {var sum=c+d; alert(sum);
+var sum1 = new transfer(sum);
+sum1.toRim();
+}
+break;
+
+case '-': {var diff=c-d; alert(diff);
+if(diff > 0){ var diff1 = new transfer(diff); diff1.toRim()} else{alert("Negative not transfer"); break;}
+
+}
+break;
+
+case '*': {var comp = c*d; alert(comp);
+var comp1 = new transfer(comp);
+comp1.toRim();
+}
+break;
+
+case '/':{var div=c/d; alert(div);
+var div1 = new transfer(div);
+div1.toRim();
+}
+break;
+}
+</script>
+</body>
+</html>
